@@ -1,0 +1,33 @@
+renovate:
+  stage: deploy
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  image: docker.io/renovate/renovate:37.83.4
+  variables:
+    LOG_LEVEL: debug
+    RENOVATE_ENDPOINT: ${CI_API_V4_URL}
+    RENOVATE_GIT_AUTHOR: "${GITLAB_USER_NAME} <${GITLAB_USER_EMAIL}>"
+    RENOVATE_PLATFORM: gitlab
+    RENOVATE_REPOSITORIES: '["${CI_PROJECT_PATH}"]'
+    RENOVATE_TOKEN: ${RENOVATE_TOKEN}
+    RENOVATE_X_PLATFORM_VERSION: ${CI_SERVER_VERSION}
+  script:
+    - test -n "${RENOVATE_ENDPOINT:?}"
+    - test -n "${RENOVATE_GIT_AUTHOR:?}"
+    - test -n "${RENOVATE_PLATFORM:?}"
+    - test -n "${RENOVATE_REPOSITORIES:?}"
+    - test -n "${RENOVATE_TOKEN:?}"
+    - test -n "${RENOVATE_X_PLATFORM_VERSION:?}"
+    - renovate
+
+alpine:
+  stage: test
+  image: busybox:1.36.0-musl
+  script:
+    - echo hello
+
+busybox:
+  stage: test
+  image: alpine:3.18.4
+  script:
+    - echo hello
