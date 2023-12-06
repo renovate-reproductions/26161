@@ -11,13 +11,21 @@ renovate:
     RENOVATE_REPOSITORIES: '["${CI_PROJECT_PATH}"]'
     RENOVATE_TOKEN: ${RENOVATE_TOKEN}
     RENOVATE_X_PLATFORM_VERSION: ${CI_SERVER_VERSION}
-  script:
+  before_script:
     - test -n "${RENOVATE_ENDPOINT:?}"
+    - test -n "${GITLAB_USER_NAME:?}"
+    - test -n "${GITLAB_USER_EMAIL:?}"
     - test -n "${RENOVATE_GIT_AUTHOR:?}"
+    - test "${RENOVATE_GIT_AUTHOR:?}" != ' <>'
     - test -n "${RENOVATE_PLATFORM:?}"
+    - test -n "${CI_PROJECT_PATH:?}"
     - test -n "${RENOVATE_REPOSITORIES:?}"
+    - test "${RENOVATE_REPOSITORIES:?}" != '[""]'
     - test -n "${RENOVATE_TOKEN:?}"
+    - test "${RENOVATE_TOKEN:?}" != '${RENOVATE_TOKEN}'
+    - test -n "${CI_SERVER_VERSION:?}"
     - test -n "${RENOVATE_X_PLATFORM_VERSION:?}"
+  script:
     - renovate
 
 alpine:
