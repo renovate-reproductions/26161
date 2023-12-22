@@ -2,7 +2,7 @@ renovate:
   stage: deploy
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-  image: docker.io/renovate/renovate:37.88.1@sha256:82026881a515dfcb5fd8444efd47a4c89ea551898be53a046b0e02dd28b34c8b
+  image: docker.io/renovate/renovate:37.107.0@sha256:75e76e7834563f232c69f64c31a993023c1c222b86f9e9a771c9cf8f8fb04d5a
   variables:
     LOG_LEVEL: debug
     RENOVATE_ENDPOINT: ${CI_API_V4_URL}
