@@ -24,6 +24,12 @@
         "busybox"
       ],
       "pinDigests": false
+    },
+    {
+      "matchPackageNames": [
+        "docker.io/renovate/renovate"
+      ],
+      "enabled": false
     }
   ]
 }
